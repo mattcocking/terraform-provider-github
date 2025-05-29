@@ -58,28 +58,6 @@ func dataSourceGithubOrganizationIpAllowListRead(d *schema.ResourceData, meta in
 	client := meta.(*Owner).v4client
 	orgName := meta.(*Owner).name
 
-	type PageInfo struct {
-		StartCursor     githubv4.String
-		EndCursor       githubv4.String
-		HasNextPage     githubv4.Boolean
-		HasPreviousPage githubv4.Boolean
-	}
-
-	type IpAllowListEntry struct {
-		ID             githubv4.String
-		Name           githubv4.String
-		AllowListValue githubv4.String
-		IsActive       githubv4.Boolean
-		CreatedAt      githubv4.String
-		UpdatedAt      githubv4.String
-	}
-
-	type IpAllowListEntries struct {
-		Nodes      []IpAllowListEntry
-		PageInfo   PageInfo
-		TotalCount githubv4.Int
-	}
-
 	var query struct {
 		Organization struct {
 			ID                 githubv4.String

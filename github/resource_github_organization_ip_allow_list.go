@@ -110,18 +110,7 @@ func resourceGithubOrganizationIpAllowListRead(d *schema.ResourceData, meta inte
 
 	var query struct {
 		Organization struct {
-			IpAllowListEntries struct {
-				Nodes []struct {
-					// TODO: this can share the same type as the data source
-					ID             githubv4.ID
-					Name           githubv4.String
-					AllowListValue githubv4.String
-					IsActive       githubv4.Boolean
-					CreatedAt      githubv4.String
-					UpdatedAt      githubv4.String
-				}
-				PageInfo PageInfo
-			} `graphql:"ipAllowListEntries(first: 100, after:$cursor)"`
+			IpAllowListEntries IpAllowListEntries `graphql:"ipAllowListEntries(first: 100, after:$cursor)"`
 		} `graphql:"organization(login: $login)"`
 	}
 
